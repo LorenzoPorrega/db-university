@@ -55,7 +55,7 @@ ON `teachers`.`id` = `course_teacher`.`teacher_id`
 WHERE `departments`.`name` = "Dipartimento di Matematica";
 
 -- 7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente, filtrare i tentativi con voto minimo 18
-SELECT `courses`.`name` AS "Nome Insegnamento", CONCAT(`students`.`name`, " " , `students`.`surname`)  AS "Nome studente", MAX(IF(`exam_student`.`vote` >= 18, `exam_student`.`vote`, "INSUFFICIENTE")) AS "Voto massimo ottenuto", COUNT(`exam_student`.`student_id`) AS "Numero di tentativi" 
+SELECT `courses`.`name` AS "Nome Insegnamento", CONCAT(`students`.`name`, " " , `students`.`surname`)  AS "Nome studente", MAX(IF(`exam_student`.`vote` >= 18, `exam_student`.`vote`, CONCAT("INSUFFICIENTE", " (", `exam_student`.`vote`, ")" ))) AS "Voto massimo ottenuto", COUNT(`exam_student`.`student_id`) AS "Numero di tentativi" 
 FROM `exam_student`
 INNER JOIN `exams`
 ON `exam_student`.`exam_id` = `exams`.`id`
